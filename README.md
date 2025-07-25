@@ -8,7 +8,7 @@ This is a full-stack web application designed for users to discover, add, and re
 
  ```bash
     https://https://book-review-platform-kohl.vercel.app/
-    ```
+```
 
 
 ## Features
