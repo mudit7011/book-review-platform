@@ -94,7 +94,7 @@ router.get('/:id', async (req, res) => {
       return res.status(404).json({ msg: 'Book not found' });
     }
 
-    const reviews = await Review.find({ book: req.params.id }).populate('reviewer', 'username'); // Populate reviewer username
+    const reviews = await Review.find({ book: req.params.id }).populate('reviewer', 'username');
 
     const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
     const averageRating = reviews.length > 0 ? (totalRating / reviews.length).toFixed(1) : 0;

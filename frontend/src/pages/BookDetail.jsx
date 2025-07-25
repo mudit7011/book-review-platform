@@ -1,14 +1,13 @@
-// src/pages/BookDetail.jsx
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import API from '../api/axios';
 import StarRating from '../components/StarRating';
-import { useAuth } from '../context/AuthContext'; // Import useAuth to get user info
+import { useAuth } from '../context/AuthContext'; 
 
 const BookDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // Initialize useNavigate
-  const { isAuthenticated, user: currentUser } = useAuth(); // Get current user from context
+  const navigate = useNavigate(); 
+  const { isAuthenticated, user: currentUser } = useAuth();
   const [book, setBook] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
@@ -55,7 +54,7 @@ const BookDetail = () => {
       setReviewSuccess('Review added successfully!');
       setNewReviewText('');
       setNewReviewRating(1);
-      fetchBookDetails(); // Re-fetch book details to update reviews and avg rating
+      fetchBookDetails();
     } catch (err) {
       console.error('Error submitting review:', err.response?.data || err.message);
       setReviewError(err.response?.data?.msg || 'Failed to add review. Please try again.');
@@ -67,7 +66,7 @@ const BookDetail = () => {
       try {
         await API.delete(`/books/${id}`);
         alert('Book deleted successfully!');
-        navigate('/books'); // Redirect to book list after deletion
+        navigate('/books');
       } catch (err) {
         console.error('Error deleting book:', err.response?.data || err.message);
         setError(err.response?.data?.msg || 'Failed to delete book. You might not have permission.');
@@ -87,14 +86,12 @@ const BookDetail = () => {
     return <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-600 text-lg">Book not found.</div>;
   }
 
-  // Determine if the current user is the owner of the book
   const isBookOwner = isAuthenticated && currentUser && book.addedBy === currentUser.id;
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8 flex flex-col md:flex-row gap-6 items-center md:items-start">
-          {/* Book Cover Image */}
           <div className="w-full md:w-1/3 flex-shrink-0">
             <div className="w-full h-auto bg-gray-200 flex items-center justify-center overflow-hidden object-contain rounded-lg shadow-md">
               {book.imageUrl ? (
@@ -109,8 +106,6 @@ const BookDetail = () => {
               )}
             </div>
           </div>
-
-          {/* Book Details */}
           <div className="w-full md:w-2/3">
             <h1 className="text-4xl font-extrabold text-gray-900 mb-2">{book.title}</h1>
             <p className="text-gray-700 text-xl mb-1">by <span className="font-semibold">{book.author}</span></p>
@@ -133,7 +128,6 @@ const BookDetail = () => {
           </div>
         </div>
 
-        {/* Reviews Section */}
         <div className="bg-white p-6 rounded-xl shadow-lg mb-8">
           <h2 className="text-3xl font-bold mb-6 text-gray-900">Reviews</h2>
           {reviews.length === 0 ? (
@@ -159,7 +153,6 @@ const BookDetail = () => {
           )}
         </div>
 
-        {/* Add Review Section */}
         {isAuthenticated && (
           <div className="bg-white p-6 rounded-xl shadow-lg">
             <h2 className="text-3xl font-bold mb-6 text-gray-900">Add Your Review</h2>

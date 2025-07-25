@@ -11,10 +11,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
+    setError(''); 
     const result = await login(email, password);
     if (result.success) {
-      navigate('/books'); // Redirect to book list on successful login
+      navigate('/books');
     } else {
       setError(result.error);
     }

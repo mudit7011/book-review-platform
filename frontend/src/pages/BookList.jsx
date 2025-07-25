@@ -1,4 +1,3 @@
-// src/pages/BookList.jsx
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import API from "../api/axios";
@@ -50,7 +49,6 @@ const BookList = () => {
           Discover Books
         </h1>
 
-        {/* Filter Section */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8 flex flex-col md:flex-row items-center justify-center gap-4">
           <input
             type="text"
@@ -78,7 +76,6 @@ const BookList = () => {
           </button>
         </div>
 
-        {/* Loading/Error/No Books */}
         {loading && (
           <p className="text-center text-blue-600 text-lg">Loading books...</p>
         )}
@@ -89,7 +86,6 @@ const BookList = () => {
           </p>
         )}
 
-        {/* Book Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
           {books.map((book) => (
             <div
@@ -97,7 +93,6 @@ const BookList = () => {
               className="bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 overflow-hidden"
             >
               <Link to={`/books/${book._id}`} className="block">
-                {/* Book Cover Image */}
                 <div className="w-full h-56 bg-gray-200 flex items-center justify-center overflow-hidden">
                   {book.imageUrl ? (
                     <img
@@ -108,7 +103,7 @@ const BookList = () => {
                         e.target.onerror = null;
                         e.target.src =
                           "https://via.placeholder.com/150x200?text=No+Cover";
-                      }} // Fallback on error
+                      }} 
                     />
                   ) : (
                     <span className="text-gray-500 text-sm">
@@ -119,7 +114,6 @@ const BookList = () => {
 
                 <div className="p-6">
                   {" "}
-                  {/* Padding for text content */}
                   <h2
                     className="text-2xl font-bold text-gray-900 mb-2 truncate"
                     title={book.title}
@@ -149,7 +143,6 @@ const BookList = () => {
           ))}
         </div>
 
-        {/* Pagination Controls */}
         {totalPages > 1 && (
           <div className="flex justify-center items-center space-x-3 mt-8">
             <button

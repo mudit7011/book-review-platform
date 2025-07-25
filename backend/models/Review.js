@@ -1,16 +1,15 @@
-// backend/models/Review.js
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ReviewSchema = new Schema({
   book: {
     type: Schema.Types.ObjectId,
-    ref: 'Book', // Reference to the Book model
+    ref: 'Book', 
     required: true
   },
   reviewer: {
     type: Schema.Types.ObjectId,
-    ref: 'User', // Reference to the User model
+    ref: 'User', 
     required: true
   },
   comment: {

@@ -1,4 +1,3 @@
-// backend/models/Book.js
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -19,9 +18,9 @@ const BookSchema = new Schema({
     type: String,
     required: false
   },
-  imageUrl: { // Add this field
+  imageUrl: {
     type: String,
-    required: false // Image URL is optional
+    required: false
   },
   addedBy: {
     type: Schema.Types.ObjectId,
@@ -37,7 +36,6 @@ const BookSchema = new Schema({
   toObject: { virtuals: true }
 });
 
-// Virtual for average rating (unchanged)
 BookSchema.virtual('averageRating', {
   ref: 'Review',
   localField: '_id',

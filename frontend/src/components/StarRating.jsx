@@ -6,7 +6,6 @@ const StarRating = ({ rating, maxRating = 5 }) => {
   const emptyStars = maxRating - fullStars - (hasHalfStar ? 1 : 0);
 
   const fullStarPath = "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2l-2.81 6.63L2 9.24l5.46 4.73L5.82 21z";
-  // This path draws a star from the left half, typically used for left-half fill
   const leftHalfStarPath = "M12 4.24v11.75l-5.78 3.5 1.44-6.2-4.83-4.16 6.34-.54z";
 
   return (
@@ -16,7 +15,7 @@ const StarRating = ({ rating, maxRating = 5 }) => {
           key={`full-${i}`}
           className="w-5 h-5 fill-current"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24" // Make sure this is 24 24
+          viewBox="0 0 24 24"
         >
           <path d={fullStarPath} />
         </svg>
@@ -26,11 +25,9 @@ const StarRating = ({ rating, maxRating = 5 }) => {
         <svg
           className="w-5 h-5 fill-current"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24" // Make sure this is 24 24
+          viewBox="0 0 24 24"
         >
-          {/* Base for the half-star - usually a full, possibly muted, star */}
           <path d={fullStarPath} className="text-gray-300" /> 
-          {/* Overlay for the filled left half */}
           <path d={leftHalfStarPath} className="text-yellow-500" />
         </svg>
       )}
@@ -40,16 +37,15 @@ const StarRating = ({ rating, maxRating = 5 }) => {
           key={`empty-${i}`}
           className="w-5 h-5 fill-current text-gray-300"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24" // Make sure this is 24 24
+          viewBox="0 0 24 24"
         >
           <path d={fullStarPath} />
         </svg>
       ))}
-
-      {/* Remove the redundant numerical display from here if it's already in the parent component */}
-      {/* <span className="ml-2 text-gray-700">({rating.toFixed(1)})</span> */}
     </div>
   );
 };
 
 export default StarRating;
+
+// I used Google Gemini to understand the logic behind the star rating system and how to implement it effectively

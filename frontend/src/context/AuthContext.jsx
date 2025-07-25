@@ -1,5 +1,3 @@
-// src/context/AuthContext.jsx
-
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import API from '../api/axios';
@@ -10,10 +8,10 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
-  const [authLoading, setAuthLoading] = useState(true); // New loading state
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('token'); // Read directly from localStorage here
+    const storedToken = localStorage.getItem('token')
     if (storedToken) {
       try {
         const decodedUser = jwtDecode(storedToken);
@@ -25,10 +23,9 @@ export const AuthProvider = ({ children }) => {
           setUser(null);
           localStorage.removeItem('token');
         } else {
-          setToken(storedToken); // Ensure token state is set if coming from localStorage
+          setToken(storedToken);
           setIsAuthenticated(true);
           setUser(decodedUser.user);
-          // Set Axios default header for all subsequent API calls
           API.defaults.headers.common['x-auth-token'] = storedToken; 
         }
       } catch (error) {
@@ -36,25 +33,23 @@ export const AuthProvider = ({ children }) => {
         setToken(null);
         setIsAuthenticated(false);
         setUser(null);
-        localStorage.removeItem('token');
+        localStorage.removeItem('token')
       }
     } else {
-      // No token found, ensure states are reset
       setToken(null);
       setIsAuthenticated(false);
       setUser(null);
-      localStorage.removeItem('token'); // Clear any potential lingering invalid token
+      localStorage.removeItem('token')
     }
-    setAuthLoading(false); // Authentication check is complete
-  }, []); // Empty dependency array: runs only once on mount
+    setAuthLoading(false)
+  }, [])
 
-  // Update effect for when token state *does* change (e.g., after login/logout)
   useEffect(() => {
     if (token) {
         try {
             const decodedUser = jwtDecode(token);
             if (decodedUser.exp * 1000 < Date.now()) {
-                setAuthLoading(false); // Set loading to false before clearing token
+                setAuthLoading(false);
                 setToken(null);
                 setIsAuthenticated(false);
                 setUser(null);
@@ -66,7 +61,7 @@ export const AuthProvider = ({ children }) => {
                 API.defaults.headers.common['x-auth-token'] = token;
             }
         } catch (error) {
-            setAuthLoading(false); // Set loading to false before clearing token
+            setAuthLoading(false);
             setToken(null);
             setIsAuthenticated(false);
             setUser(null);
@@ -76,8 +71,7 @@ export const AuthProvider = ({ children }) => {
     } else {
         setIsAuthenticated(false);
         setUser(null);
-        delete API.defaults.headers.common['x-auth-token']; // Remove header on logout
-        // No need to setAuthLoading(false) here, as the first useEffect handles initial load
+        delete API.defaults.headers.common['x-auth-token']; 
     }
   }, [token]);
 
@@ -86,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await API.post('/auth/login', { email, password });
       localStorage.setItem('token', res.data.token);
-      setToken(res.data.token); // This will trigger the second useEffect
+      setToken(res.data.token);
       return { success: true };
     } catch (err) {
       console.error('Login failed:', err.response?.data || err.message);
@@ -98,7 +92,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await API.post('/auth/signup', { username, email, password });
       localStorage.setItem('token', res.data.token);
-      setToken(res.data.token); // This will trigger the second useEffect
+      setToken(res.data.token);
       return { success: true };
     } catch (err) {
       console.error('Signup failed:', err.response?.data || err.message);
@@ -107,8 +101,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setToken(null); // This will trigger the second useEffect
-    localStorage.removeItem('token'); // Ensure token is removed from localStorage
+    setToken(null);
+    localStorage.removeItem('token');
   };
 
   return (

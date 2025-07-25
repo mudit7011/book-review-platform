@@ -12,10 +12,10 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
+    setError('');
     const result = await signup(username, email, password);
     if (result.success) {
-      navigate('/books'); // Redirect to book list on successful signup
+      navigate('/books'); 
     } else {
       setError(result.error);
     }

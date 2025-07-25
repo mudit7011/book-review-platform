@@ -7,7 +7,7 @@ const AddBook = () => {
   const [author, setAuthor] = useState('');
   const [genre, setGenre] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [description, setDescription] = useState(''); // New state for description
+  const [description, setDescription] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,7 +21,6 @@ const AddBook = () => {
     setIsSubmitting(true);
 
     try {
-      // Include description in the API call
       await API.post('/books', { title, author, genre, imageUrl, description }); 
 
       setSuccess('Book added successfully! Redirecting...');
@@ -29,7 +28,7 @@ const AddBook = () => {
       setAuthor('');
       setGenre('');
       setImageUrl('');
-      setDescription(''); // Clear description field after submission
+      setDescription('');
       setTimeout(() => navigate('/books'), 1500);
     } catch (err) {
       console.error('Error adding book:', err.response?.data || err.message);
@@ -46,7 +45,6 @@ const AddBook = () => {
           <h1 className="text-4xl font-extrabold text-gray-900 mb-6 text-center tracking-tight">
             Add New Book
           </h1>
-          {/* Messages */}
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
               <strong className="font-bold">Error!</strong>
@@ -60,7 +58,6 @@ const AddBook = () => {
             </div>
           )}
           <form onSubmit={handleSubmit}>
-            {/* Title */}
             <div className="mb-5">
               <label htmlFor="title" className="block text-gray-700 text-sm font-medium mb-2">
                 Title
@@ -75,7 +72,6 @@ const AddBook = () => {
                 required
               />
             </div>
-            {/* Author */}
             <div className="mb-5">
               <label htmlFor="author" className="block text-gray-700 text-sm font-medium mb-2">
                 Author
@@ -90,7 +86,6 @@ const AddBook = () => {
                 required
               />
             </div>
-            {/* Genre */}
             <div className="mb-5">
               <label htmlFor="genre" className="block text-gray-700 text-sm font-medium mb-2">
                 Genre
@@ -105,7 +100,6 @@ const AddBook = () => {
                 required
               />
             </div>
-            {/* Image URL */}
             <div className="mb-7">
               <label htmlFor="imageUrl" className="block text-gray-700 text-sm font-medium mb-2">
                 Book Cover Image URL (Optional)
@@ -118,7 +112,7 @@ const AddBook = () => {
                 onChange={(e) => setImageUrl(e.target.value)}
                 placeholder="https://example.com/your-book-cover.jpg"
               />
-              {imageUrl && ( // Show preview if URL is entered
+              {imageUrl && ( // preview
                 <div className="mt-4 text-center">
                   <p className="text-gray-600 text-sm mb-2">Image Preview:</p>
                   <img
@@ -131,7 +125,6 @@ const AddBook = () => {
               )}
             </div>
 
-            {/* New: Description Textarea */}
             <div className="mb-7">
               <label htmlFor="description" className="block text-gray-700 text-sm font-medium mb-2">
                 Description (Optional)
@@ -145,8 +138,6 @@ const AddBook = () => {
                 placeholder="Provide a detailed summary or overview of the book..."
               ></textarea>
             </div>
-
-            {/* Submit Button */}
             <button
               type="submit"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
