@@ -4,6 +4,13 @@
 
 This is a full-stack web application designed for users to discover, add, and review books. It provides a platform for book enthusiasts to share their opinions and explore a rich collection of literary works. Built with the MERN (MongoDB, Express.js, React, Node.js) stack, it offers a modern, responsive user interface and robust backend functionalities.
 
+## Deployed Link
+
+ ```bash
+    https://https://book-review-platform-kohl.vercel.app/
+    ```
+
+
 ## Features
 
 *   **User Authentication:** Secure user registration and login.
