@@ -10,6 +10,12 @@ This is a full-stack web application designed for users to discover, add, and re
     https://book-review-platform-kohl.vercel.app/
 ```
 
+## Test Credentials
+
+```bash
+    Email:- test@gmail.com
+    password:- 123456
+```
 
 ## Features
 
