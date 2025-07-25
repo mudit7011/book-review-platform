@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 const allowedOrigins = [
   'http://localhost:5173',
-  'http://book-review-platform-kohl.vercel.app' 
+  'https://book-review-platform-kohl.vercel.app' 
 ];
 
 const corsOptions = {
