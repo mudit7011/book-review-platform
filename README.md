@@ -7,7 +7,7 @@ This is a full-stack web application designed for users to discover, add, and re
 ## Deployed Link
 
  ```bash
-    https://https://book-review-platform-kohl.vercel.app/
+    https://book-review-platform-kohl.vercel.app/
 ```
 
 
