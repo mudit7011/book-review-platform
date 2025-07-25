@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:3000/api"
+  baseURL: "https://book-review-platform-kk4l.onrender.com/api"
 });
 
 // Attach JWT token if present
